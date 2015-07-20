@@ -1,0 +1,95 @@
+@charset "UTF-8";
+* {
+  box-sizing: border-box;
+  transition: all .25s; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%; }
+
+html {
+  font-size: 40px; }
+
+body {
+  background: #333333;
+  color: white; }
+
+#game:before, .card-pile-→:before, .card-pile-←:before, .card-pile-↓:before, .card-pile-↑:before, .card-fan-→:before, .card-fan-←:before, .card-fan-↓:before, .card-fan-↑:before, #game:after, .card-pile-→:after, .card-pile-←:after, .card-pile-↓:after, .card-pile-↑:after, .card-fan-→:after, .card-fan-←:after, .card-fan-↓:after, .card-fan-↑:after {
+  content: ' ';
+  display: table; }
+#game:after, .card-pile-→:after, .card-pile-←:after, .card-pile-↓:after, .card-pile-↑:after, .card-fan-→:after, .card-fan-←:after, .card-fan-↓:after, .card-fan-↑:after {
+  clear: both; }
+
+.card-pile-→, .card-pile-←, .card-pile-↓, .card-pile-↑, .card-fan-→, .card-fan-←, .card-fan-↓, .card-fan-↑ {
+  margin: 0;
+  padding: 0;
+  list-style: none; }
+  .card-pile-→ li, .card-pile-← li, .card-pile-↓ li, .card-pile-↑ li, .card-fan-→ li, .card-fan-← li, .card-fan-↓ li, .card-fan-↑ li {
+    margin: 0; }
+
+#game {
+  position: relative;
+  padding: 0.5rem;
+  height: 100%; }
+
+.card {
+  position: relative;
+  height: 6rem;
+  width: 4rem;
+  background-color: white;
+  border-radius: 0.2rem;
+  float: left;
+  margin: 0.5rem;
+  box-shadow: 0 0 0.1rem 0 black; }
+
+.card-pile-→, .card-pile-←, .card-pile-↓, .card-pile-↑, .card-fan-→, .card-fan-←, .card-fan-↓, .card-fan-↑ {
+  float: left;
+  margin: 0.5rem; }
+  .card-pile-→:empty, .card-pile-←:empty, .card-pile-↓:empty, .card-pile-↑:empty, .card-fan-→:empty, .card-fan-←:empty, .card-fan-↓:empty, .card-fan-↑:empty {
+    height: 6rem;
+    width: 4rem;
+    border-radius: 0.2rem;
+    box-shadow: inset 0 0 .5rem 0 black;
+    opacity: .5; }
+  .card-pile-→ .card, .card-pile-← .card, .card-pile-↓ .card, .card-pile-↑ .card, .card-fan-→ .card, .card-fan-← .card, .card-fan-↓ .card, .card-fan-↑ .card {
+    float: left; }
+
+.card-pile-→ .card:not(:first-child) {
+  margin-left: 0.15rem; }
+.card-pile-→ .card:not(:last-child) {
+  margin-right: -4rem; }
+
+.card-pile-← .card {
+  float: right; }
+.card-pile-← .card:not(:first-child) {
+  margin-right: 0.15rem; }
+.card-pile-← .card:not(:last-child) {
+  margin-left: -4rem; }
+
+.card-pile-↓, .card-pile-↑ {
+  width: 4rem; }
+  .card-pile-↓ .card:not(:first-child), .card-pile-↑ .card:not(:first-child) {
+    margin-top: 0.15rem; }
+  .card-pile-↓ .card:not(:last-child), .card-pile-↑ .card:not(:last-child) {
+    margin-bottom: -6rem; }
+
+.card-fan-→ .card:not(:first-child) {
+  margin-left: 1rem; }
+.card-fan-→ .card:not(:last-child) {
+  margin-right: -4rem; }
+
+.card-fan-← .card {
+  float: right; }
+.card-fan-← .card:not(:first-child) {
+  margin-right: 1rem; }
+.card-fan-← .card:not(:last-child) {
+  margin-left: -4rem; }
+
+.card-fan-↓, .card-fan-↑ {
+  width: 4rem; }
+  .card-fan-↓ .card:not(:first-child), .card-fan-↑ .card:not(:first-child) {
+    margin-top: 1rem; }
+  .card-fan-↓ .card:not(:last-child), .card-fan-↑ .card:not(:last-child) {
+    margin-bottom: -6rem; }

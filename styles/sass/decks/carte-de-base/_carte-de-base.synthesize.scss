@@ -1,0 +1,185 @@
+// @file _carte-de-base.synthesize.scss
+// "Paint" all the cards on the game board in the "carte de base" way.
+//
+// @author Derek Dunagan <https://github.com/derekdunagan>
+
+@import '../../carte-blanche.variables';
+
+.card {
+
+    &[data-disposition="⍗"] {
+        border: .2rem solid white;
+        background: linear-gradient(to bottom, #6666ff, #000099);
+    }
+
+    &[data-disposition="⍐"] {
+        $card-padding: .75rem;
+
+        // Place and size the pips on the bodies of spot cards.
+        $pip-width: 1rem;
+        $pip-height: 1rem;
+
+        background-size: $pip-width $pip-height;
+        background-repeat: no-repeat;
+
+        &[data-rank="2"] {
+            background-position: center top    $card-padding,
+                                 center bottom $card-padding;
+        }
+        &[data-rank="3"] {
+            background-position: center top    $card-padding,
+                                 center center,
+                                 center bottom $card-padding;
+        }
+        &[data-rank="4"] {
+            background-position: left  $card-padding top    $card-padding,
+                                 right $card-padding top    $card-padding,
+                                 left  $card-padding bottom $card-padding,
+                                 right $card-padding bottom $card-padding;
+        }
+        &[data-rank="5"] {
+            background-position: left  $card-padding top    $card-padding,
+                                 right $card-padding top    $card-padding,
+                                 center              center,
+                                 left  $card-padding bottom $card-padding,
+                                 right $card-padding bottom $card-padding;
+        }
+        &[data-rank="6"] {
+            background-position: left  $card-padding top    $card-padding,
+                                 right $card-padding top    $card-padding,
+                                 left  $card-padding center,
+                                 right $card-padding center,
+                                 left  $card-padding bottom $card-padding,
+                                 right $card-padding bottom $card-padding;
+        }
+        $inner-column-row-margin: (($card-height - $card-padding * 2) - $pip-height * 2) / 3;
+        &[data-rank="7"] {
+            background-position: left  $card-padding top    $card-padding,
+                                 right $card-padding top    $card-padding,
+                                 center              top    $inner-column-row-margin  + $card-padding,
+                                 left  $card-padding center,
+                                 right $card-padding center,
+                                 left  $card-padding bottom $card-padding,
+                                 right $card-padding bottom $card-padding;
+        }
+        &[data-rank="8"] {
+            background-position: left  $card-padding top    $card-padding,
+                                 right $card-padding top    $card-padding,
+                                 center              top    $inner-column-row-margin  + $card-padding,
+                                 left  $card-padding center,
+                                 right $card-padding center,
+                                 center              bottom $inner-column-row-margin  + $card-padding,
+                                 left  $card-padding bottom $card-padding,
+                                 right $card-padding bottom $card-padding;
+        }
+        $outer-columns-row-height: (($card-height - $card-padding * 2) - $pip-height * 4) / 3 + $pip-height;
+        &[data-rank="9"] {
+            background-position: left  $card-padding top    $card-padding,
+                                 right $card-padding top    $card-padding,
+                                 left  $card-padding top    $outer-columns-row-height + $card-padding,
+                                 right $card-padding top    $outer-columns-row-height + $card-padding,
+                                 center              center,
+                                 left  $card-padding bottom $outer-columns-row-height + $card-padding,
+                                 right $card-padding bottom $outer-columns-row-height + $card-padding,
+                                 left  $card-padding bottom $card-padding,
+                                 right $card-padding bottom $card-padding;
+        }
+        $inner-column-row-margin:  (($card-height - $card-padding * 2) - $pip-height * 2) / 4;
+        &[data-rank="10"] {
+            background-position: left  $card-padding top    $card-padding,
+                                 right $card-padding top    $card-padding,
+                                 center              top    $inner-column-row-margin  + $card-padding,
+                                 left  $card-padding top    $outer-columns-row-height + $card-padding,
+                                 right $card-padding top    $outer-columns-row-height + $card-padding,
+                                 left  $card-padding bottom $outer-columns-row-height + $card-padding,
+                                 right $card-padding bottom $outer-columns-row-height + $card-padding,
+                                 center              bottom $inner-column-row-margin  + $card-padding,
+                                 left  $card-padding bottom $card-padding,
+                                 right $card-padding bottom $card-padding;
+        }
+
+        // Place and size the body of aces and court cards.
+        @each $rank in ace, jack, queen, king {
+            &[data-rank="#{$rank}"] {
+                background-position: center center;
+                background-size: auto 4rem;
+            }
+        }
+
+        // Place and size the corner pips and ranks.
+        $corner-width: 1rem;
+        $corner-height: 1.5rem;
+        $corner-image-width: .75rem;
+        $corner-rearrange-time: .5s;
+
+        &::before {
+            content: '';
+            position: absolute;
+                left: 0;
+                top: 0;
+            height: $corner-height;
+            width: $corner-width;
+            background-repeat: no-repeat;
+            background-size: $corner-image-width auto;
+            background-position: left .125rem top    .125rem,
+                                 left .125rem bottom 0;
+
+            // For moving the corner or its pip into view when another card is
+            // placed on top of it.
+            transition: left   $corner-rearrange-time,
+                        right  $corner-rearrange-time,
+                        top    $corner-rearrange-time,
+                        bottom $corner-rearrange-time;
+        }
+        .card-pile-← &:not(:last-child)::before,
+        .card-fan-← &:not(:last-child)::before {
+            left: auto;
+            right: 0 !important;
+            background-position: right .125rem top    .125rem,
+                                 right .125rem bottom 0;
+        }
+        .card-pile-↓ &:not(:last-child)::before,
+        .card-fan-↓ &:not(:last-child)::before,
+        .card-pile-↑ &:not(:last-child)::before,
+        .card-fan-↑ &:not(:last-child)::before {
+            width: $corner-height;
+            background-position: left .125rem top    .125rem,
+                                 left (.125rem + $corner-image-width) top    .125rem;
+        }
+
+        // Set the pip and rank images for every card in every suit.
+        @each $suit in $suits {
+
+            $color: map-get($suit-colors, $suit);
+            $pip: french-deck-get-pip($suit, $color);
+
+            &[data-suit="#{$suit}"] {
+
+                @each $rank in $ranks {
+                    &[data-rank="#{$rank}"] {
+
+                        // Set the body images for spot cards.
+                        @if index(2 3 4 5 6 7 8 9 10, $rank) {
+                            $background-image: $pip;
+                            @for $i from 2 through $rank {
+                                $background-image: append($background-image, $pip, comma);
+                            }
+                            background-image: $background-image;
+
+                        // Set the body images for aces and court cards.
+                        // Just use a large, normal pip for now.
+                        } @else if index(ace jack queen king, $rank) {
+                            background-image: $pip;
+                        }
+
+                        // Set the corner images for all cards.
+                        &::before {
+                            background-image: french-deck-get-rank($rank, $color),
+                                              french-deck-get-pip($suit, $color);
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

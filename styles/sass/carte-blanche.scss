@@ -1,0 +1,120 @@
+// @file carte-blanche.scss
+// Style the game environment and the general design for every type of card.
+//
+// @author Derek Dunagan <https://github.com/derekdunagan>
+
+// Override undesirable rendering engine defaults.
+*{box-sizing:border-box;transition:all .25s;}
+html,body{margin:0;padding:0;height:100%;width:100%;}
+
+html {
+    font-size: 40px; // Default rem
+}
+
+body {
+    background: #333333;
+    color: white;
+}
+
+@import 'carte-blanche.utilities';
+@import 'carte-blanche.variables';
+
+#game {
+    @extend %clearfix;
+    position: relative;
+    padding: $gutter / 2;
+    height: 100%;
+}
+
+.card {
+    position: relative;
+    height: $card-height;
+    width: $card-width;
+    background-color: white;
+    border-radius: $card-corner-radius;
+    float: left;
+    margin: $gutter / 2;
+    box-shadow: $card-shadow;
+}
+
+%card-group {
+    @extend %clearfix;
+    @extend %reset-list;
+    float: left;
+    margin: $gutter / 2;
+
+    &:empty {
+        height: $card-height;
+        width: $card-width;
+        border-radius: $card-corner-radius;
+        box-shadow: inset 0 0 .5rem 0 black;
+        opacity: .5;
+    }
+
+    .card {
+        float: left;
+    }
+}
+@mixin card-group-→($card-edge) {
+    .card:not(:first-child) {
+        margin-left: $card-edge;
+    }
+    .card:not(:last-child) {
+        margin-right: -$card-width;
+    }
+}
+@mixin card-group-←($card-edge) {
+    .card {
+        float: right;
+    }
+    .card:not(:first-child) {
+        margin-right: $card-edge;
+    }
+    .card:not(:last-child) {
+        margin-left: -$card-width;
+    }
+}
+@mixin card-group-↓($card-edge) {
+    width: $card-width;
+
+    .card:not(:first-child) {
+        margin-top: $card-edge;
+    }
+    .card:not(:last-child) {
+        margin-bottom: -$card-height;
+    }
+}
+
+.card-pile-→ {
+    @extend %card-group;
+    @include card-group-→($card-pile-edge);
+}
+.card-pile-← {
+    @extend %card-group;
+    @include card-group-←($card-pile-edge);
+}
+.card-pile-↓ {
+    @extend %card-group;
+    @include card-group-↓($card-pile-edge);
+}
+.card-pile-↑ {
+    @extend .card-pile-↓;
+    // TODO: Figure out a sane way to do this.
+}
+
+.card-fan-→ {
+    @extend %card-group;
+    @include card-group-→($card-fan-edge);
+}
+.card-fan-← {
+    @extend %card-group;
+    @include card-group-←($card-fan-edge);
+}
+.card-fan-↓ {
+    @extend %card-group;
+    @include card-group-↓($card-fan-edge);
+}
+.card-fan-↑ {
+    @extend .card-fan-↓;
+    // TODO: Figure out a sane way to do this.
+}

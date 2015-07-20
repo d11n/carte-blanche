@@ -1,0 +1,10 @@
+// @file carte-de-base.scss
+// Basic theme for a French deck of cards
+//
+// @author Derek Dunagan <https://github.com/derekdunagan>
+
+@import '../french-deck';
+
+// In carte-de-base themes. Overrides go here.
+
+@import 'carte-de-base.synthesize';

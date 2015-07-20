@@ -1,0 +1,26 @@
+// @file _carte-blanche.utilities.scss
+// Useful bits o' SASS that other stylesheets may want to use.
+//
+// @author Derek Dunagan <https://github.com/derekdunagan>
+
+// Clear"fix" — Courtesy of Nicolas Gallagher
+%clearfix{
+    &:before, &:after {
+        content:' ';
+        display:table;
+    }
+    &:after{
+        clear:both;
+    }
+}
+
+// Reset a list to be more like a div.
+%reset-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+    li {
+        margin: 0;
+    }
+}

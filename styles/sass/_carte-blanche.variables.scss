@@ -1,0 +1,15 @@
+// @file _carte-blanche.variables.scss
+// Separate variables out from the main stylesheet,
+// so that any other stylesheet can use them if needed.
+//
+// @author Derek Dunagan <https://github.com/derekdunagan>
+
+$gutter: 1rem;
+
+$card-width: 4rem;
+$card-height: 6rem;
+$card-corner-radius: .2rem;
+$card-shadow: 0 0 .1rem 0 black;
+
+$card-pile-edge: .15rem;
+$card-fan-edge: 1rem;
